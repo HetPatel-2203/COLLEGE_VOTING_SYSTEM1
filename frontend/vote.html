@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+
+Vote Event
+
+</title>
+
+<link rel="stylesheet"
+
+href="css/dashboard.css">
+
+</head>
+
+<body>
+
+<div class="main">
+
+<div class="topbar">
+
+<h1>
+
+Event Voting
+
+</h1>
+
+</div>
+
+<div class="card">
+
+<h2>
+
+Vote For Event
+
+</h2>
+
+<br>
+
+<label>
+
+Your Opinion
+
+</label>
+
+<br><br>
+
+<button
+
+id="yesBtn"
+
+onclick="setVote('YES')"
+
+>
+
+👍 YES
+
+</button>
+
+<br><br>
+
+<button
+
+id="noBtn"
+
+onclick="setVote('NO')"
+
+>
+
+👎 NO
+
+</button>
+
+<br><br>
+
+<textarea
+
+id="query"
+
+placeholder=
+
+"Any query or suggestion..."
+
+style="width:100%;
+height:120px;
+padding:15px;
+border-radius:10px;"
+
+></textarea>
+
+<br>
+
+<button
+
+onclick="submitVote()"
+
+>
+
+Submit Vote
+
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+let voteChoice="";
+
+function setVote(v){
+
+voteChoice=v;
+
+alert(
+
+"Selected : "+v
+
+);
+
+}
+
+
+
+async function submitVote(){
+
+let user=
+
+JSON.parse(
+
+localStorage.getItem(
+
+"user"
+
+)
+
+);
+
+if(!voteChoice){
+
+alert(
+
+"Select YES or NO"
+
+);
+
+return;
+
+}
+
+let url=
+
+new URLSearchParams(
+
+window.location.search
+
+);
+
+let eventId=
+
+url.get(
+
+"id"
+
+);
+
+let r=
+
+await fetch(
+
+"http://localhost:5001/vote",
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":
+
+"application/json"
+
+},
+
+body:
+
+JSON.stringify({
+
+studentId:
+
+user._id,
+
+eventId:
+
+eventId,
+
+candidate:
+
+voteChoice,
+
+department:
+
+user.department,
+
+query:
+
+query.value
+
+})
+
+}
+
+);
+
+let d=
+
+await r.json();
+
+alert(
+
+d.msg
+
+);
+
+window.location=
+
+"dashboard.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Notifications
+</title>
+
+<link rel="stylesheet"
+href="css/dashboard.css">
+
+</head>
+
+<body>
+
+
+
+<div class="main">
+
+<h1>
+🔔 Notifications
+</h1>
+
+<div
+id="n"
+class="cards">
+
+</div>
+
+</div>
+
+<script>
+
+async function loadNotifications(){
+
+try{
+
+let r =
+await fetch(
+"http://localhost:5001/notifications"
+);
+
+let d =
+await r.json();
+
+let h = "";
+
+if(!d || d.length === 0){
+
+h = `
+
+<div class="card">
+
+<h2>
+No Notifications
+</h2>
+
+<p>
+No notifications available.
+</p>
+
+</div>
+
+`;
+
+}
+else{
+
+d.reverse().forEach(x=>{
+
+h += `
+
+<div class="card">
+
+<h2>
+${x.title || "Notification"}
+</h2>
+
+<p>
+${x.message || ""}
+</p>
+
+</div>
+
+`;
+
+});
+
+}
+
+document.getElementById(
+"n"
+).innerHTML = h;
+
+}
+catch(err){
+
+console.log(err);
+
+document.getElementById(
+"n"
+).innerHTML = `
+
+<div class="card">
+
+<h2>
+Error
+</h2>
+
+<p>
+Unable to load notifications.
+</p>
+
+</div>
+
+`;
+
+}
+
+}
+
+loadNotifications();
+
+</script>
+
+</body>
+
+</html>

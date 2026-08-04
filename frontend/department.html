@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+
+Department Management
+
+</title>
+
+<link rel="stylesheet"
+
+href="css/dashboard.css">
+
+</head>
+
+<body>
+
+<div class="main">
+
+<div class="topbar">
+
+<h1>
+
+Department Management
+
+</h1>
+
+</div>
+
+<div class="card">
+
+<input
+
+id="dept"
+
+placeholder=
+
+"Department Name"
+
+>
+
+<input
+
+id="total"
+
+type="number"
+
+placeholder=
+
+"Total Students"
+
+>
+
+<button
+
+id="addBtn"
+
+>
+
+Add Department
+
+</button>
+
+</div>
+
+<br>
+
+<div
+
+id="list"
+
+class="cards"
+
+>
+
+</div>
+
+</div>
+
+
+<script>
+
+document.addEventListener(
+
+"DOMContentLoaded",
+
+()=>{
+
+document
+
+.getElementById(
+
+"addBtn"
+
+)
+
+.addEventListener(
+
+"click",
+
+saveDept
+
+);
+
+load();
+
+});
+
+
+
+async function saveDept(){
+
+const deptInput=
+
+document.getElementById(
+
+"dept"
+
+);
+
+const totalInput=
+
+document.getElementById(
+
+"total"
+
+);
+
+if(
+
+!deptInput.value ||
+
+!totalInput.value
+
+){
+
+alert(
+
+"Fill all fields"
+
+);
+
+return;
+
+}
+
+let r=
+
+await fetch(
+
+"http://localhost:5001/department",
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":
+
+"application/json"
+
+},
+
+body:
+
+JSON.stringify({
+
+name:
+
+deptInput.value,
+
+totalStudents:
+
+Number(
+
+totalInput.value
+
+)
+
+})
+
+}
+
+);
+
+let d=
+
+await r.json();
+
+alert(d.msg);
+
+deptInput.value="";
+
+totalInput.value="";
+
+load();
+
+}
+
+
+
+async function load(){
+
+let r=
+
+await fetch(
+
+"http://localhost:5001/departments"
+
+);
+
+let data=
+
+await r.json();
+
+let html="";
+
+data.forEach(x=>{
+
+html+=`
+
+<div class="card">
+
+<h2>${x.name}</h2>
+
+<p>
+
+Students:
+
+${x.totalStudents}
+
+</p>
+
+<p>
+
+Votes:
+
+${x.totalVotes || 0}
+
+/
+
+${x.totalStudents}
+
+</p>
+
+</div>
+
+`;
+
+});
+
+document.getElementById(
+
+"list"
+
+).innerHTML=html;
+
+}
+
+</script>
+</body>
+
+</html>
