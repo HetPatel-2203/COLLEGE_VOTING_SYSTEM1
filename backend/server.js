@@ -371,7 +371,7 @@ msg:"All Fields Required"
 const imagePath =
 req.file
 ?
-"http://localhost:5001/uploads/" + req.file.filename
+`${req.protocol}://${req.get("host")}/uploads/` + req.file.filename
 :
 "";
 
@@ -873,7 +873,7 @@ msg:"Please Select Image"
 }
 
 const imagePath =
-"http://localhost:5001/uploads/" +
+`${req.protocol}://${req.get("host")}/uploads/` +
 req.file.filename;
 
 await User.findByIdAndUpdate(
@@ -924,6 +924,8 @@ process.env.PORT || 5001;
 app.listen(
 
 PORT,
+
+"0.0.0.0",
 
 ()=>{
 
