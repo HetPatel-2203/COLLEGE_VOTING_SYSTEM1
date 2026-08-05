@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/config.js"></script>
+<title>Admin Event Management</title>
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+<div class="main">
+
+<div class="topbar">
+
+<h1>
+
+Manage Events
+
+</h1>
+
+</div>
+
+<div id="events" class="cards"></div>
+
+</div>
+
+<script>
+
+async function load(){
+
+let r=
+await fetch(
+API_URL + "/events"
+);
+
+let data=
+await r.json();
+
+let html="";
+
+data.forEach(e=>{
+
+html+=`
+
+<div class="card">
+
+<img src="${e.poster}">
+
+<h2>${e.eventName}</h2>
+
+<p>${e.department}</p>
+
+<p>${e.date}</p>
+
+<button
+onclick="editEvent('${e._id}')">
+
+Edit
+
+</button>
+
+<button
+onclick="del('${e._id}')">
+
+Delete
+
+</button>
+
+</div>
+
+`;
+
+});
+
+events.innerHTML=html;
+
+}
+
+
+
+async function del(id){
+
+await fetch(
+
+API_URL + "/event/"+id,
+
+{
+
+method:"DELETE"
+
+}
+
+);
+
+load();
+
+}
+
+
+
+async function editEvent(id){
+
+let name=
+
+prompt(
+
+"New Event Name"
+
+);
+
+if(!name) return;
+
+await fetch(
+
+API_URL + "/event/"+id,
+
+{
+
+method:"PUT",
+
+headers:{
+
+"Content-Type":
+
+"application/json"
+
+},
+
+body:
+
+JSON.stringify({
+
+eventName:name
+
+})
+
+}
+
+);
+
+load();
+
+}
+
+load();
+
+</script>
+
+</body>
+
+</html>

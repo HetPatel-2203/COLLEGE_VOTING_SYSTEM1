@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/config.js"></script>
+
+<title>
+
+Profile Settings
+
+</title>
+
+<link rel="stylesheet"
+
+href="css/dashboard.css">
+
+</head>
+
+<body>
+
+<div class="main">
+
+<div class="topbar">
+
+<h1>
+
+Update Profile
+
+</h1>
+
+</div>
+
+<div class="card">
+
+<input
+
+type="file"
+
+id="photo"
+
+>
+
+<button
+
+id="uploadBtn"
+
+>
+
+Upload Photo
+
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+document.getElementById(
+
+"uploadBtn"
+
+).addEventListener(
+
+"click",
+
+async()=>{
+
+try{
+
+const file=
+
+document.getElementById(
+
+"photo"
+
+).files[0];
+
+if(!file){
+
+alert(
+
+"Select Photo"
+
+);
+
+return;
+
+}
+
+const user=
+
+JSON.parse(
+
+localStorage.getItem(
+
+"user"
+
+)
+
+);
+
+let formData=
+
+new FormData();
+
+formData.append(
+
+"photo",
+
+file
+
+);
+
+formData.append(
+
+"userId",
+
+user._id
+
+);
+
+let r=
+
+await fetch(
+
+API_URL + "/profile-photo",
+
+{
+
+method:"POST",
+
+body:formData
+
+}
+
+);
+
+let d=
+
+await r.json();
+
+alert(d.msg);
+
+if(d.success){
+
+user.photo=d.photo;
+window.location="profile.html";
+
+localStorage.setItem(
+
+"user",
+
+JSON.stringify(user)
+
+);
+
+}
+
+}
+
+catch(err){
+
+console.log(err);
+
+alert(
+
+"Upload Failed"
+
+);
+
+}
+
+});
+
+</script>
+</body>
+
+</html>

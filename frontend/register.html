@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/config.js"></script>
+
+<title>
+
+Register
+
+</title>
+
+<link rel="stylesheet"
+
+href="css/dashboard.css">
+
+</head>
+
+<body>
+
+<div class="hero">
+
+<div class="auth-box">
+
+<h1>
+
+Student Register
+
+</h1>
+
+<input
+id="name"
+
+placeholder="Full Name">
+
+<input
+id="email"
+
+type="email"
+
+placeholder="Email">
+
+<input
+id="password"
+
+type="password"
+
+placeholder="Password">
+
+<input
+
+id="rollno"
+
+placeholder="Roll Number"
+
+>
+
+<select id="department">
+
+<option>
+
+Loading...
+
+</option>
+
+</select>
+
+<button
+id="registerBtn">
+
+Register
+
+</button>
+
+<br><br>
+
+<a href="login.html">
+
+Already Account? Login
+
+</a>
+
+</div>
+
+</div>
+
+
+<script>
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+loadDept();
+
+const registerBtn=
+document.getElementById(
+"registerBtn"
+);
+
+registerBtn.addEventListener(
+"click",
+registerUser
+);
+
+});
+
+
+
+async function loadDept(){
+
+try{
+
+let r=
+await fetch(
+API_URL + "/departments"
+);
+
+let data=
+await r.json();
+
+const department=
+document.getElementById(
+"department"
+);
+
+department.innerHTML="";
+
+if(data.length===0){
+
+department.innerHTML=
+"<option>No Department Found</option>";
+
+return;
+
+}
+
+data.forEach(x=>{
+
+department.innerHTML+=`
+
+<option value="${x.name}">
+
+${x.name}
+
+</option>
+
+`;
+
+});
+
+}
+
+catch(err){
+
+console.log(err);
+
+document.getElementById(
+"department"
+).innerHTML=
+"<option>Department Load Error</option>";
+
+}
+
+}
+
+
+
+async function registerUser(){
+
+try{
+
+const name=
+document.getElementById(
+"name"
+).value.trim();
+
+const email=
+document.getElementById(
+"email"
+).value.trim();
+
+const password=
+document.getElementById(
+"password"
+).value.trim();
+
+const rollno=
+document.getElementById(
+"rollno"
+).value.trim();
+
+const department=
+document.getElementById(
+"department"
+).value;
+
+
+
+/* Validation */
+
+if(name===""){
+
+alert("Enter Full Name");
+
+return;
+
+}
+
+if(name.length < 3){
+
+alert("Name must be at least 3 characters");
+
+return;
+
+}
+
+if(email===""){
+
+alert("Enter Email");
+
+return;
+
+}
+
+const emailPattern=
+/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if(!emailPattern.test(email)){
+
+alert("Enter Valid Email");
+
+return;
+
+}
+
+if(password===""){
+
+alert("Enter Password");
+
+return;
+
+}
+
+if(password.length < 6){
+
+alert("Password must be at least 6 characters");
+
+return;
+
+}
+
+if(rollno===""){
+
+alert("Enter Roll Number");
+
+return;
+
+}
+
+if(department===""){
+
+alert("Select Department");
+
+return;
+
+}
+
+
+
+/* API */
+
+let r=
+await fetch(
+API_URL + "/register",
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":
+"application/json"
+
+},
+
+body:
+JSON.stringify({
+
+name:name,
+
+email:email,
+
+password:password,
+
+rollno:rollno,
+
+department:department
+
+})
+
+}
+
+);
+
+let d=
+await r.json();
+
+alert(
+d.msg || "Registration Complete"
+);
+
+if(d.success){
+
+window.location=
+"login.html";
+
+}
+
+}
+
+catch(err){
+
+console.log(err);
+
+alert(
+"Register Error"
+);
+
+}
+
+}
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/config.js"></script>
+<title>Students</title>
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+<div class="main">
+
+<h1>Registered Students</h1>
+
+<div id="students" class="cards"></div>
+
+</div>
+
+<script>
+
+async function loadStudents(){
+
+let r =
+await fetch(API_URL + "/students");
+
+let data =
+await r.json();
+
+let html = "";
+
+data.forEach(x=>{
+
+html += `
+
+<div class="card">
+
+<img
+src="${x.photo || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}"
+style="
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+">
+
+<h2>${x.name}</h2>
+
+<p>Email: ${x.email}</p>
+
+<p>Roll No: ${x.rollno}</p>
+
+<p>Department: ${x.department}</p>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("students").innerHTML = html;
+
+}
+
+loadStudents();
+
+</script>
+
+</body>
+</html>

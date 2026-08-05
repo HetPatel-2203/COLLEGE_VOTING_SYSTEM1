@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/config.js"></script>
+
+<title>
+
+Login
+
+</title>
+
+<link rel="stylesheet"
+
+href="css/dashboard.css">
+
+</head>
+
+<body>
+
+<div class="hero">
+
+<div class="auth-box">
+
+<h1>
+
+Student Login
+
+</h1>
+
+<input
+
+id="email"
+
+type="email"
+
+placeholder="Email"
+
+>
+
+<input
+
+id="password"
+
+type="password"
+
+placeholder="Password"
+
+>
+
+<button
+
+id="loginBtn"
+
+>
+
+Login
+
+</button>
+
+<br><br>
+
+<a href="register.html">
+
+Create Account
+
+</a>
+
+</div>
+
+</div>
+
+
+<script>
+
+document.addEventListener(
+
+"DOMContentLoaded",
+
+()=>{
+
+const loginBtn=
+
+document.getElementById(
+
+"loginBtn"
+
+);
+
+const emailInput=
+
+document.getElementById(
+
+"email"
+
+);
+
+const passwordInput=
+
+document.getElementById(
+
+"password"
+
+);
+
+
+
+loginBtn.addEventListener(
+
+"click",
+
+loginUser
+
+);
+
+});
+
+
+
+async function loginUser(){
+
+try{
+
+const email=
+
+document.getElementById(
+
+"email"
+
+).value.trim();
+
+const password=
+
+document.getElementById(
+
+"password"
+
+).value.trim();
+
+
+
+/* Validation */
+
+if(email===""){
+
+alert("Enter Email");
+
+return;
+
+}
+
+
+
+const emailPattern=
+
+/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+
+if(!emailPattern.test(email)){
+
+alert("Enter Valid Email");
+
+return;
+
+}
+
+
+
+if(password===""){
+
+alert("Enter Password");
+
+return;
+
+}
+
+
+
+if(password.length<6){
+
+alert("Password must be at least 6 characters");
+
+return;
+
+}
+
+
+
+/* Login API */
+
+let r=
+
+await fetch(
+
+API_URL + "/login",
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":
+
+"application/json"
+
+},
+
+body:
+
+JSON.stringify({
+
+email:email,
+
+password:password
+
+})
+
+}
+
+);
+
+
+
+let d=
+
+await r.json();
+
+
+
+if(d.success){
+
+alert(
+
+d.msg || "Login Successful"
+
+);
+
+
+
+localStorage.setItem(
+
+"user",
+
+JSON.stringify(
+
+d.user
+
+)
+
+);
+
+
+
+window.location=
+
+"dashboard.html";
+
+}
+
+else{
+
+alert(
+
+d.msg || "Login Failed"
+
+);
+
+}
+
+
+
+}
+
+catch(err){
+
+console.log(err);
+
+alert(
+
+"Server Error"
+
+);
+
+}
+
+}
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+
+Student Profile
+
+</title>
+
+<link rel="stylesheet"
+
+href="css/dashboard.css">
+
+</head>
+
+<body>
+
+<div class="main">
+
+<div class="topbar">
+
+<h1>
+
+Student Profile
+
+</h1>
+
+</div>
+
+<div class="card"
+
+style="text-align:center;max-width:500px;margin:auto;">
+
+<img
+
+id="profilePhoto"
+
+src=""
+
+width="150"
+
+height="150"
+
+style="
+
+width:150px;
+height:150px;
+border-radius:50%;
+object-fit:cover;
+border:4px solid #2563eb;
+display:block;
+margin:auto;
+
+"
+
+>
+
+<h2 id="studentName">
+
+</h2>
+
+<p id="studentEmail">
+
+</p>
+
+<p id="studentRoll">
+
+</p>
+
+<p id="studentDept">
+
+</p>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* Login Check */
+
+const user =
+JSON.parse(
+localStorage.getItem("user")
+);
+
+if(!user){
+
+alert("Please Login First");
+
+window.location =
+"login.html";
+
+}
+
+/* Profile Data */
+
+document.getElementById(
+"studentName"
+).innerText =
+user.name || "Student Name";
+
+document.getElementById(
+"studentEmail"
+).innerText =
+"Email: " +
+(user.email || "Not Available");
+
+document.getElementById(
+"studentRoll"
+).innerText =
+"Roll No: " +
+(user.rollno || "Not Available");
+
+document.getElementById(
+"studentDept"
+).innerText =
+"Department: " +
+(user.department || "Not Available");
+
+/* Profile Photo */
+
+const photo =
+document.getElementById(
+"profilePhoto"
+);
+
+if(
+user.photo &&
+user.photo.trim() !== ""
+){
+
+photo.src =
+user.photo +
+"?" +
+new Date().getTime();
+
+}
+else{
+
+photo.src =
+"https://cdn-icons-png.flaticon.com/512/149/149071.png";
+
+}
+
+/* Image Error Fix */
+
+photo.onerror = function(){
+
+this.src =
+"https://cdn-icons-png.flaticon.com/512/149/149071.png";
+
+};
+
+</script>
+</body>
+
+</html>

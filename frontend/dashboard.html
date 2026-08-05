@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Dashboard</title>
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+<script>
+
+const user =
+JSON.parse(
+localStorage.getItem("user")
+);
+
+if(!user){
+window.location="login.html";
+}
+
+</script>
+
+<input type="checkbox" id="navToggle" class="navToggle">
+<label for="navToggle" class="navToggleBtn">Menu</label>
+
+<div class="sidebar">
+
+<h2>🎓 Student Panel</h2>
+
+<a href="dashboard.html">Dashboard</a>
+
+<a href="event-details.html">  Events</a>
+
+<a href="result.html"> Results</a>
+
+<a href="attendance.html">Attendance</a>
+
+<a href="certificate.html"> Certificates</a>
+
+<a href="leaderboard.html">Leaderboard</a>
+
+<a href="notification.html"> Notifications</a>
+
+<a href="profile.html">Profile</a>
+
+<a href="settings.html"> <i class="fa fa-profile"></i>Profile Update</a>
+
+<a href="#" onclick="logout()"> Logout </a>
+
+
+
+
+
+
+
+
+</div>
+
+</div>
+
+<div class="main">
+
+<div class="topbar">
+
+<h1>
+College Event Voting System
+</h1>
+
+</div>
+
+<div class="cards">
+
+<a href="event-details.html" class="card">
+📅 Events
+</a>
+
+<a href="vote.html" class="card">
+🗳 Voting
+</a>
+
+<a href="result.html" class="card">
+🏆 Results
+</a>
+
+<a href="certificate.html" class="card">
+📜 Certificates
+</a>
+
+<a href="notification.html" class="card">
+🔔 Notifications
+</a>
+
+
+
+</div>
+</div>
+
+<script>
+
+
+
+/* Logout */
+
+function logout(){
+
+localStorage.removeItem("user");
+
+window.location =
+"login.html";
+
+}
+
+</script>
+
+
+
+</body>
+</html>

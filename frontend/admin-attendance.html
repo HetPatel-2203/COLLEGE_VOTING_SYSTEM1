@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/config.js"></script>
+<title>Attendance</title>
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+<div class="main">
+
+<h1>Student Attendance</h1>
+
+<div id="attendanceBox" class="cards"></div>
+
+</div>
+
+<script>
+
+async function loadAttendance(){
+
+let r =
+await fetch(API_URL + "/attendance");
+
+let data =
+await r.json();
+
+let html = "";
+
+data.forEach(x=>{
+
+html += `
+
+<div class="card">
+
+<h2>${x.name}</h2>
+
+<p>Roll No: ${x.rollno}</p>
+
+<p>Department: ${x.department}</p>
+
+<p>Event: ${x.eventName}</p>
+
+<p>Date: ${x.date}</p>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("attendanceBox").innerHTML = html;
+
+}
+
+loadAttendance();
+
+</script>
+
+</body>
+</html>

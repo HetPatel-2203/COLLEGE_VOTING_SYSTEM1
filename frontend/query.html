@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/config.js"></script>
+
+<title>
+
+Student Queries
+
+</title>
+
+<link rel="stylesheet"
+
+href="css/dashboard.css">
+
+</head>
+
+<body>
+
+<div class="main">
+
+<div class="topbar">
+
+<h1>
+
+Student Queries
+
+</h1>
+
+</div>
+
+<div
+
+id="queries"
+
+class="cards"
+
+>
+
+</div>
+
+</div>
+
+<script>
+
+async function load(){
+
+let r=
+
+await fetch(
+
+API_URL + "/queries"
+
+);
+
+let data=
+
+await r.json();
+
+let html="";
+
+data.forEach(x=>{
+
+html+=`
+
+<div class="card">
+
+<h2>
+
+Department:
+
+${x.department}
+
+</h2>
+
+<p>
+
+Vote:
+
+${x.candidate}
+
+</p>
+
+<p>
+
+Message:
+
+${x.query}
+
+</p>
+
+</div>
+
+`;
+
+});
+
+queries.innerHTML=
+
+html;
+
+}
+
+load();
+
+</script>
+
+</body>
+
+</html>
