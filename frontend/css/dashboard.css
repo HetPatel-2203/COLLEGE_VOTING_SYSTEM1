@@ -1,0 +1,656 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f7fb;
+min-height:100vh;
+}
+
+/* HERO SECTION */
+
+.hero{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+gap:50px;
+
+padding:70px;
+
+min-height:90vh;
+
+background:
+
+linear-gradient(
+
+135deg,
+
+#eef2ff,
+
+#ffffff
+
+);
+
+}
+
+.hero-text{
+
+flex:1;
+
+}
+
+.hero-text h1{
+
+font-size:60px;
+
+color:#111827;
+
+margin-bottom:20px;
+
+line-height:1.2;
+
+}
+
+.hero-text p{
+
+font-size:22px;
+
+color:#6b7280;
+
+margin-bottom:30px;
+
+}
+
+.hero-text button{
+
+width:220px;
+
+padding:15px;
+
+border:none;
+
+border-radius:12px;
+
+background:#2563eb;
+
+color:white;
+
+font-size:18px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.hero-text button:hover{
+
+background:#1d4ed8;
+
+transform:
+
+translateY(-3px);
+
+}
+
+.hero-img{
+
+flex:1;
+
+display:flex;
+
+justify-content:center;
+
+}
+
+.hero-img img{
+
+width:100%;
+
+max-width:600px;
+
+height:420px;
+
+object-fit:cover;
+
+border-radius:25px;
+
+box-shadow:
+
+0 10px 30px
+
+rgba(0,0,0,.15);
+
+}
+
+/* FEATURE CARDS */
+
+.cards{
+
+display:grid;
+
+grid-template-columns:
+
+repeat(
+
+auto-fit,
+
+minmax(min(250px,100%),1fr)
+
+);
+
+gap:25px;
+
+padding:50px;
+
+}
+
+.card{
+
+background:white;
+
+padding:30px;
+
+border-radius:20px;
+
+box-shadow:
+
+0 5px 20px
+
+rgba(0,0,0,.08);
+
+text-align:center;
+
+font-size:22px;
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:
+
+translateY(-5px);
+
+}
+
+/* DASHBOARD */
+.sidebar{
+width:250px;
+background:#1e293b;
+height:100vh;
+position:fixed;
+left:0;
+top:0;
+
+overflow-y:auto;
+overflow-x:hidden;
+
+scrollbar-width:thin;
+}
+.sidebar h2{
+
+color:white;
+
+margin-bottom:30px;
+
+}
+
+.sidebar a{
+
+display:block;
+
+padding: 12px;
+
+margin-bottom:10px;
+
+text-decoration:none;
+
+color:white;
+
+border-radius:10px;
+
+}
+
+.sidebar a:hover{
+
+background:#2563eb;
+
+}
+
+.main{
+
+margin-left:250px;
+
+padding:30px;
+
+}
+
+.topbar{
+
+background:white;
+
+padding:20px;
+
+border-radius:20px;
+
+box-shadow:
+
+0 5px 20px
+
+rgba(0,0,0,.08);
+
+margin-bottom:25px;
+
+}
+
+/* FORM */
+
+input,
+select{
+
+width:100%;
+
+padding:14px;
+
+margin-top:12px;
+
+border:
+
+1px solid #ddd;
+
+border-radius:10px;
+
+outline:none;
+
+}
+
+button{
+
+padding:14px;
+
+border:none;
+
+border-radius:10px;
+
+background:#2563eb;
+
+color:white;
+
+cursor:pointer;
+
+margin-top:15px;
+
+}
+
+footer{
+
+text-align:center;
+
+padding:30px;
+
+color:gray;
+
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.hero{
+
+flex-direction:column;
+
+padding:40px;
+
+text-align:center;
+
+}
+
+.hero-text h1{
+
+font-size:40px;
+
+}
+
+.sidebar{
+
+width:100%;
+
+height:auto;
+
+position:relative;
+
+display:none;
+
+}
+
+.navToggleBtn{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+width:100%;
+padding:16px 20px;
+background:#1e293b;
+color:#fff;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+position:sticky;
+top:0;
+z-index:100;
+user-select:none;
+-webkit-tap-highlight-color:transparent;
+}
+
+.navToggleBtn::after{
+content:"☰";
+font-size:26px;
+line-height:1;
+}
+
+.navToggle:checked + .navToggleBtn::after{
+content:"✕";
+}
+
+.navToggle:checked + .navToggleBtn + .sidebar{
+display:block;
+}
+
+.sidebar a{
+padding:12px;
+min-height:44px;
+display:flex;
+align-items:center;
+}
+
+.main{
+
+margin-left:0;
+
+}
+
+}
+.auth-box{
+
+width:420px;
+
+max-width:100%;
+
+background:white;
+
+padding:35px;
+
+border-radius:20px;
+
+box-shadow:
+
+0 5px 20px
+
+rgba(0,0,0,.1);
+
+}
+
+.auth-box input,
+.auth-box select{
+
+width:100%;
+
+padding:14px;
+
+margin-top:15px;
+
+border:
+
+1px solid #ddd;
+
+border-radius:10px;
+
+}
+
+.auth-box button{
+
+width:100%;
+
+margin-top:20px;
+
+}
+
+.cards a{
+text-decoration:none;
+color:black;
+}
+
+/* ===============================================
+   RESPONSIVE MOBILE IMPROVEMENTS
+   Desktop layout (>900px) is unchanged.
+   These rules only apply on smaller screens.
+   =============================================== */
+
+/* Smooth scrolling */
+html{
+scroll-behavior:smooth;
+}
+
+/* Prevent any horizontal overflow */
+html,
+body{
+max-width:100%;
+overflow-x:hidden;
+}
+
+/* Images never overflow their container and scale proportionally */
+img{
+max-width:100%;
+height:auto;
+}
+
+/* Mobile navigation toggle (hamburger) - hidden on desktop */
+.navToggle{
+position:absolute;
+width:1px;
+height:1px;
+opacity:0;
+overflow:hidden;
+clip:rect(0 0 0 0);
+clip-path:inset(50%);
+white-space:nowrap;
+}
+
+@media(min-width:901px){
+.navToggleBtn{
+display:none;
+}
+}
+
+.navToggle:focus-visible + .navToggleBtn{
+outline:3px solid #2563eb;
+outline-offset:-3px;
+}
+
+/* Long words / text wrap correctly across all elements */
+h1,h2,h3,p,a,button,label,input,select,textarea{
+overflow-wrap:break-word;
+word-wrap:break-word;
+}
+
+/* ---- Tablets & small screens ---- */
+/* Keep hero image scaling proportional instead of fixed 420px height */
+@media(max-width:900px){
+
+.hero-img img{
+height:auto;
+max-height:420px;
+}
+
+}
+
+/* ---- Mobile (<=768px) ---- */
+@media(max-width:768px){
+
+.hero{
+padding:30px 20px;
+gap:25px;
+}
+
+.hero-text h1{
+font-size:clamp(30px,7vw,40px);
+}
+
+.hero-text p{
+font-size:clamp(15px,4vw,22px);
+}
+
+.hero-text a{
+display:block;
+width:100%;
+max-width:280px;
+margin:0 auto;
+}
+
+.hero-text button{
+width:100%;
+max-width:280px;
+font-size:16px;
+}
+
+.cards{
+padding:25px;
+gap:15px;
+grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));
+}
+
+.card{
+padding:20px;
+font-size:18px;
+}
+
+.card button{
+width:100%;
+margin-top:10px;
+}
+
+.main{
+padding:15px;
+}
+
+.topbar{
+padding:15px;
+}
+
+.auth-box{
+padding:25px;
+}
+
+/* Prevent iOS auto-zoom on inputs */
+input,
+select,
+textarea,
+button{
+ font-size:16px;
+}
+
+/* Comfortable touch targets */
+button{
+min-height:44px;
+}
+
+}
+
+/* ---- Small phones (<=576px) ---- */
+@media(max-width:576px){
+
+.hero{
+padding:25px 15px;
+}
+
+.hero-text h1{
+font-size:clamp(26px,9vw,34px);
+}
+
+.hero-text p{
+font-size:15px;
+}
+
+.cards{
+padding:15px;
+gap:12px;
+}
+
+.card{
+font-size:16px;
+}
+
+.sidebar h2{
+font-size:20px;
+margin-bottom:15px;
+}
+
+.auth-box h1{
+ font-size:26px;
+}
+
+/* Scale page headings smoothly on small screens */
+.topbar h1,
+.main > h1{
+ font-size:clamp(20px,6vw,32px);
+}
+
+.auth-box input,
+.auth-box select,
+.auth-box button{
+padding:14px;
+}
+
+/* Certificate scales down cleanly (overrides inline fixed padding/border) */
+.certificate{
+padding:20px !important;
+border-width:5px !important;
+}
+
+.certificate h1{
+font-size:clamp(22px,7vw,40px);
+}
+
+.certificate p{
+font-size:16px;
+}
+
+.downloadBtn{
+padding:14px 24px;
+font-size:16px;
+}
+
+}
+
+/* ---- Very small phones (<=400px) ---- */
+@media(max-width:400px){
+
+.hero{
+padding:20px 12px;
+}
+
+.main{
+padding:12px;
+}
+
+.cards{
+padding:12px;
+gap:10px;
+}
+
+.auth-box{
+padding:20px 15px;
+}
+
+}
+
